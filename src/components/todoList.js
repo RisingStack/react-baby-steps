@@ -9,6 +9,30 @@ import TodoItem from './todoItem'
 * @class TodoList
 */
 class TodoList extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      query: null
+    }
+
+    // autobinding only for lifecycle methods
+    this.onQueryChanged = this.onQueryChanged.bind(this)
+  }
+
+  static isMatch (query, item) {
+    if (!query) {
+      return true
+    }
+
+    return item.get('name').match(new RegExp(query, 'i'))
+  }
+
+  onQueryChanged (ev) {
+    this.setState({
+      query: ev.target.value
+    })
+  }
 
   /**
    * @method render
@@ -21,12 +45,20 @@ class TodoList extends Component {
     }
 
     const { items } = this.props
+    const { query } = this.state
 
-    return (<table style={style}>
-      <tbody>
-        {items.map(item => <TodoItem key={item.get('id')} item={item} />)}
-      </tbody>
-    </table>)
+    return (
+      <div>
+        <input onChange={this.onQueryChanged} type="text" placeholder="search" tabIndex="1" />
+        <table style={style}>
+          <tbody>
+            {items
+              .filter(item => TodoList.isMatch(query, item))
+              .map(item => <TodoItem key={item.get('id')} item={item} />)}
+          </tbody>
+        </table>
+      </div>
+    )
   }
 }
 
