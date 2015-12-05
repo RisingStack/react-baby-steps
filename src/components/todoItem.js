@@ -8,6 +8,27 @@ import classNames from 'classnames'
 */
 class TodoItem extends Component {
 
+  // Lifecycle methods
+  componentWillMount () {}
+  componentDidMount () {}
+
+  componentWillReceiveProps (nextProps) {}
+  shouldComponentUpdate (nextProps, nextState) {
+    // opject comparison is expensive
+    const isDirty = nextProps.item.id !== this.props.item.id ||
+      nextProps.item.name !== this.props.item.name ||
+      nextProps.item.isResolved !== this.props.item.isResolved
+
+    console.log(`shouldComponentUpdate id: ${nextProps.item.id}, dirty: ${isDirty}`)
+
+    return isDirty
+  }
+
+  componentWillUpdate (nextProps, nextState) {}
+  componentDidUpdate (nextProps, nextState) {}
+
+  componentWillUnmount () {}
+
   /**
    * @method render
    * @return {JSX}
