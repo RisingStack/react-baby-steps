@@ -2,6 +2,8 @@
 
 import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
+import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import ReactMixin from 'react-mixin'
 
 import TodoItem from './todoItem'
 
@@ -17,7 +19,7 @@ class TodoList extends Component {
     }
 
     // autobinding only for lifecycle methods
-    this.onQueryChanged = this.onQueryChanged.bind(this)
+    this.linkState = this.linkState.bind(this)
   }
 
   static isMatch (query, item) {
@@ -26,12 +28,6 @@ class TodoList extends Component {
     }
 
     return item.get('name').match(new RegExp(query, 'i'))
-  }
-
-  onQueryChanged (ev) {
-    this.setState({
-      query: ev.target.value
-    })
   }
 
   /**
@@ -49,7 +45,7 @@ class TodoList extends Component {
 
     return (
       <div>
-        <input onChange={this.onQueryChanged} type="text" placeholder="search" tabIndex="1" />
+        <input valueLink={this.linkState('query')} type="text" placeholder="search" tabIndex="1" />
         <table style={style}>
           <tbody>
             {items
@@ -71,5 +67,7 @@ TodoList.propTypes = {
     isResolved: PropTypes.bool.isRequired
   })).isRequired
 }
+
+ReactMixin.onClass(TodoList, LinkedStateMixin)
 
 export default TodoList
