@@ -19,7 +19,7 @@ class TodoItem extends Component {
   shouldComponentUpdate (nextProps, nextState) {
     // reference comparison is cheap
     const isDirty = nextProps.item !== this.props.item
-    console.log(`shouldComponentUpdate id: ${nextProps.item.get('id')}, dirty: ${isDirty}`)
+    console.log(`shouldComponentUpdate appId: ${this.context.appId} id: ${nextProps.item.get('id')}, dirty: ${isDirty}`)
 
     return isDirty
   }
@@ -59,6 +59,10 @@ TodoItem.propTypes = {
     isResolved: PropTypes.bool.isRequired
   }).isRequired,
   color: PropTypes.string.isRequired
+}
+
+TodoItem.contextTypes = {
+  appId: PropTypes.string.isRequired
 }
 
 export default colorizeWrapper(TodoItem, ['#d15f11', '#115bd1', '#d6d641'])
