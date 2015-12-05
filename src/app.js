@@ -3,6 +3,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-render(<div>{'Hello world'}</div>,
+import TodoList from './components/todoList'
+import items from './items'
+
+render(<TodoList items={items} />,
   document.getElementById('root')
 )
