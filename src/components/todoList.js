@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import TodoItem from './todoItem'
 
@@ -23,7 +24,7 @@ class TodoList extends Component {
 
     return (<table style={style}>
       <tbody>
-        {items.map(item => <TodoItem key={item.id} item={item} />)}
+        {items.map(item => <TodoItem key={item.get('id')} item={item} />)}
       </tbody>
     </table>)
   }
@@ -32,7 +33,7 @@ class TodoList extends Component {
 TodoList.displayName = 'TodoList'
 
 TodoList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
+  items: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired

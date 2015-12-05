@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 import classNames from 'classnames'
 
 /**
@@ -14,12 +15,9 @@ class TodoItem extends Component {
 
   componentWillReceiveProps (nextProps) {}
   shouldComponentUpdate (nextProps, nextState) {
-    // opject comparison is expensive
-    const isDirty = nextProps.item.id !== this.props.item.id ||
-      nextProps.item.name !== this.props.item.name ||
-      nextProps.item.isResolved !== this.props.item.isResolved
-
-    console.log(`shouldComponentUpdate id: ${nextProps.item.id}, dirty: ${isDirty}`)
+    // reference comparison is cheap
+    const isDirty = nextProps.item !== this.props.item
+    console.log(`shouldComponentUpdate id: ${nextProps.item.get('id')}, dirty: ${isDirty}`)
 
     return isDirty
   }
@@ -37,12 +35,12 @@ class TodoItem extends Component {
     const { item } = this.props
 
     const className = classNames({
-      'resolved': item.isResolved
+      'resolved': item.get('isResolved')
     })
 
     return (<tr className={className}>
-      <td>{item.id}</td>
-      <td>{item.name}</td>
+      <td>{item.get('id')}</td>
+      <td>{item.get('name')}</td>
     </tr>)
   }
 }
@@ -50,7 +48,7 @@ class TodoItem extends Component {
 TodoItem.displayName = 'TodoItem'
 
 TodoItem.propTypes = {
-  item: PropTypes.shape({
+  item: ImmutablePropTypes.contains({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired

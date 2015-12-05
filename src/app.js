@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import { merge } from 'lodash'
 
 import TodoList from './components/todoList'
 import items from './items'
@@ -17,9 +16,7 @@ renderApp(items)
 
 // change first item to resolved
 setTimeout(() => {
-  const newItems = merge([], items, [{
-    isResolved: true
-  }])
+  const newItems = items.setIn([0, 'isResolved'], true)
 
   renderApp(newItems)
 }, 500)

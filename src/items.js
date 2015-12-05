@@ -1,4 +1,6 @@
-export default [
+import { fromJS } from 'immutable'
+
+export default fromJS([
   {
     id: 1,
     name: 'Item 1',
@@ -14,4 +16,4 @@ export default [
     name: 'Item 3',
     isResolved: false
   }
-]
+])
