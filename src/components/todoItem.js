@@ -4,6 +4,8 @@ import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import classNames from 'classnames'
 
+import colorizeWrapper from './colorizeWrapper'
+
 /**
 * @class TodoItem
 */
@@ -32,13 +34,16 @@ class TodoItem extends Component {
    * @return {JSX}
    */
   render () {
-    const { item } = this.props
+    const { item, color } = this.props
+    const style = {
+      color: color
+    }
 
     const className = classNames({
       'resolved': item.get('isResolved')
     })
 
-    return (<tr className={className}>
+    return (<tr style={style} className={className}>
       <td>{item.get('id')}</td>
       <td>{item.get('name')}</td>
     </tr>)
@@ -52,7 +57,8 @@ TodoItem.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired
-  }).isRequired
+  }).isRequired,
+  color: PropTypes.string.isRequired
 }
 
-export default TodoItem
+export default colorizeWrapper(TodoItem, ['#d15f11', '#115bd1', '#d6d641'])
