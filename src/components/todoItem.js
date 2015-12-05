@@ -4,8 +4,6 @@ import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import classNames from 'classnames'
 
-import colorizeWrapper from './colorizeWrapper'
-
 /**
 * @class TodoItem
 */
@@ -62,7 +60,7 @@ TodoItem.propTypes = {
 }
 
 TodoItem.contextTypes = {
-  appId: PropTypes.string.isRequired
+  appId: PropTypes.string
 }
 
-export default colorizeWrapper(TodoItem, ['#d15f11', '#115bd1', '#d6d641'])
+export default TodoItem

@@ -5,7 +5,10 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import ReactMixin from 'react-mixin'
 
+import colorizeWrapper from './colorizeWrapper'
 import TodoItem from './todoItem'
+
+const ColoredTodoItem = colorizeWrapper(TodoItem, ['#d15f11', '#115bd1', '#d6d641'])
 
 /**
 * @class TodoList
@@ -50,7 +53,7 @@ class TodoList extends Component {
           <tbody>
             {items
               .filter(item => TodoList.isMatch(query, item))
-              .map(item => <TodoItem key={item.get('id')} item={item} />)}
+              .map(item => <ColoredTodoItem key={item.get('id')} item={item} />)}
           </tbody>
         </table>
       </div>
