@@ -3,7 +3,7 @@
 Introducing beginners to the world of React via coding.  
 The goal of this repo is to understand the basic concepts before you start using magic ~Flux libraries.
 
-If you are looking for the ideas behind React like VirtualDOM, you should start here:  
+If you are looking for the ideas behind React, like VirtualDOM, you should start here:  
 https://blog.risingstack.com/the-react-way-getting-started-tutorial/
 
 Chapters as releases:  
@@ -11,7 +11,7 @@ https://github.com/RisingStack/react-baby-steps/releases
 
 ## chapters
 
-I recommend to checkout each chapters step by step and see what's changed.  
+I recommend you to checkout each chapters step by step and see what's changed.  
 If you are hungry for detailed explanation, ping me on Twitter: https://twitter.com/slashdotpeter
 
 1. [Build system](https://github.com/RisingStack/react-baby-steps/releases/tag/01_Build_system)
@@ -28,7 +28,7 @@ If you are hungry for detailed explanation, ping me on Twitter: https://twitter.
 
 ## next
 
-In the future I plan to add more chapters like data fething, routing and complex data handling with Redux.
+In the future I plan to add more chapters like data fetching, routing and complex data handling with Redux.
 
 ## run
 ```
