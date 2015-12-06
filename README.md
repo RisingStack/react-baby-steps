@@ -26,6 +26,10 @@ If you are hungry for detailed explanation, ping me on Twitter: https://twitter.
 10. [Flux basics with Rx](https://github.com/RisingStack/react-baby-steps/releases/tag/10_Flux_basics_with_Rx)
 11. [Redux](https://github.com/RisingStack/react-baby-steps/releases/tag/11_Redux)
 
+## next
+
+In the future I plan to add more chapters like data fething, routing and complex data handling with Redux.
+
 ## run
 ```
 npm i
