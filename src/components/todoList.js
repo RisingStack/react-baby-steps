@@ -5,6 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import ReactMixin from 'react-mixin'
 
+import Connect from '../flux/connect'
 import colorizeWrapper from './colorizeWrapper'
 import TodoItem from './todoItem'
 
@@ -43,8 +44,13 @@ class TodoList extends Component {
       backgroundColor: '#ececec'
     }
 
-    const { items } = this.props
+    const { items, dispatch } = this.props
     const { query } = this.state
+
+    const toggleItemResolve = item => dispatch({
+      type: 'ITEM_TOGGLE_RESOLVED',
+      id: item.get('id')
+    })
 
     return (
       <div>
@@ -53,7 +59,7 @@ class TodoList extends Component {
           <tbody>
             {items
               .filter(item => TodoList.isMatch(query, item))
-              .map(item => <ColoredTodoItem key={item.get('id')} item={item} />)}
+              .map(item => <ColoredTodoItem key={item.get('id')} item={item} toggleItemResolve={toggleItemResolve} />)}
           </tbody>
         </table>
       </div>
@@ -68,9 +74,12 @@ TodoList.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired
-  })).isRequired
+  })).isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 ReactMixin.onClass(TodoList, LinkedStateMixin)
 
-export default TodoList
+export default Connect(TodoList, nextState => ({
+  items: nextState
+}))

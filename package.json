@@ -29,6 +29,9 @@
     "react-immutable-proptypes": "^1.5.0",
     "react-mixin": "^3.0.3",
     "reagent": "^1.0.0",
+    "rx": "^4.0.7",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }

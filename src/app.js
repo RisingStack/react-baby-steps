@@ -3,24 +3,26 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import Provider from './components/provider'
+import Provider from './flux/provider'
+import Store from './flux/store'
+
 import TodoList from './components/todoList'
 import items from './items'
 
-function renderApp (items) {
-  render(
-    <Provider appId="app-1">
-      <TodoList items={items} />
-    </Provider>,
-    document.getElementById('root')
-  )
+const reducer = (prevState, action) => {
+  if (action.type === 'ITEM_TOGGLE_RESOLVED') {
+    const idx = prevState.findIndex(item => item.get('id') === action.id)
+    return prevState.updateIn([idx, 'isResolved'], isResolved => !isResolved)
+  }
+
+  return prevState
 }
 
-renderApp(items)
+const store = new Store(items, reducer)
 
-// change first item to resolved
-setTimeout(() => {
-  const newItems = items.setIn([0, 'isResolved'], true)
-
-  renderApp(newItems)
-}, 500)
+render(
+  <Provider store={store} appId="app-1">
+    <TodoList />
+  </Provider>,
+  document.getElementById('root')
+)

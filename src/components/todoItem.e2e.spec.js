@@ -13,7 +13,8 @@ describe('<TodoItem /> e2e', () => {
         id: 1,
         name: 'My Item',
         isResolved: true
-      })
+      }),
+      toggleItemResolve: () => {}
     }
     const wrapper = render(<TodoItem {...props} />)
     expect(wrapper.html()).to.contain('#ccc')

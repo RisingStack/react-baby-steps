@@ -8,6 +8,11 @@ import classNames from 'classnames'
 * @class TodoItem
 */
 class TodoItem extends Component {
+  constructor () {
+    super()
+
+    this.toggleResolved = this.toggleResolved.bind(this)
+  }
 
   // Lifecycle methods
   componentWillMount () {}
@@ -27,12 +32,19 @@ class TodoItem extends Component {
 
   componentWillUnmount () {}
 
+  toggleResolved () {
+    const { toggleItemResolve, item } = this.props
+
+    toggleItemResolve(item)
+  }
+
   /**
    * @method render
    * @return {JSX}
    */
   render () {
     const { item, color } = this.props
+    const { toggleResolved } = this
     const style = {
       color: color
     }
@@ -44,6 +56,9 @@ class TodoItem extends Component {
     return (<tr style={style} className={className}>
       <td>{item.get('id')}</td>
       <td>{item.get('name')}</td>
+      <td>
+        <button onClick={toggleResolved}>{'Resolve'}</button>
+      </td>
     </tr>)
   }
 }
@@ -56,7 +71,8 @@ TodoItem.propTypes = {
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired
   }).isRequired,
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
+  toggleItemResolve: PropTypes.func.isRequired
 }
 
 TodoItem.contextTypes = {
