@@ -4,10 +4,11 @@ import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import ReactMixin from 'react-mixin'
+import { connect } from 'react-redux'
 
-import Connect from '../flux/connect'
-import colorizeWrapper from './colorizeWrapper'
-import TodoItem from './todoItem'
+import actions from '../actions'
+import colorizeWrapper from '../components/colorizeWrapper'
+import TodoItem from '../components/todoItem'
 
 const ColoredTodoItem = colorizeWrapper(TodoItem, ['#d15f11', '#115bd1', '#d6d641'])
 
@@ -44,13 +45,10 @@ class TodoList extends Component {
       backgroundColor: '#ececec'
     }
 
-    const { items, dispatch } = this.props
+    const { items, itemToggleResolved } = this.props
     const { query } = this.state
 
-    const toggleItemResolve = item => dispatch({
-      type: 'ITEM_TOGGLE_RESOLVED',
-      id: item.get('id')
-    })
+    const toggleItemResolve = item => itemToggleResolved(item)
 
     return (
       <div>
@@ -75,11 +73,23 @@ TodoList.propTypes = {
     name: PropTypes.string.isRequired,
     isResolved: PropTypes.bool.isRequired
   })).isRequired,
-  dispatch: PropTypes.func.isRequired
+  itemToggleResolved: PropTypes.func.isRequired
 }
 
 ReactMixin.onClass(TodoList, LinkedStateMixin)
 
-export default Connect(TodoList, nextState => ({
-  items: nextState
-}))
+function mapStateToProps (state) {
+  return {
+    items: state.items
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  const { itemToggleResolved } = actions.items
+
+  return {
+    itemToggleResolved: item => dispatch(itemToggleResolved(item.get('id')))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

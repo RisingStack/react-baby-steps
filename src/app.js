@@ -3,25 +3,15 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import Provider from './flux/provider'
-import Store from './flux/store'
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
 
-import TodoList from './components/todoList'
-import items from './items'
+import TodoList from './containers/todoList'
 
-const reducer = (prevState, action) => {
-  if (action.type === 'ITEM_TOGGLE_RESOLVED') {
-    const idx = prevState.findIndex(item => item.get('id') === action.id)
-    return prevState.updateIn([idx, 'isResolved'], isResolved => !isResolved)
-  }
-
-  return prevState
-}
-
-const store = new Store(items, reducer)
+const store = configureStore()
 
 render(
-  <Provider store={store} appId="app-1">
+  <Provider store={store}>
     <TodoList />
   </Provider>,
   document.getElementById('root')
