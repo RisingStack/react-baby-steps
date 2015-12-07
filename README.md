@@ -1,4 +1,5 @@
 # react-baby-steps
+[ ![Codeship Status for RisingStack/react-baby-steps](https://codeship.com/projects/86ca0ee0-7f3e-0133-9947-3eaf58434e02/status?branch=master)](https://codeship.com/projects/120531)  
 
 Introducing beginners to the world of React via coding.  
 The goal of this repo is to understand the basic concepts before you start using magic ~Flux libraries.
