@@ -3,7 +3,7 @@ import { render } from 'enzyme'
 import { fromJS } from 'immutable'
 import { expect } from 'chai'
 
-import TodoItem from './TodoItem'
+import TodoItem from './todoItem'
 
 describe('<TodoItem /> e2e', () => {
   it('to have color', () => {

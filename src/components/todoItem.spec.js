@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import { fromJS } from 'immutable'
 
-import TodoItem from './TodoItem'
+import TodoItem from './todoItem'
 
 describe('<TodoItem />', () => {
   let props
