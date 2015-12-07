@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'reagent'
+import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import { fromJS } from 'immutable'
 

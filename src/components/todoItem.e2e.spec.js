@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'reagent'
+import { render } from 'enzyme'
 import { fromJS } from 'immutable'
 import { expect } from 'chai'
 
